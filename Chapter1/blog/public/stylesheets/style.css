@@ -77,3 +77,26 @@ article a:hover {
 	color: #fff;
 	-webkit-transition:color .2s linear;
 }
+
+.prepage a {
+	float: left;
+	text-decoration: none;
+	padding: .5em 1em;
+	color: #ff0000;
+	font-weight: bold;
+}
+
+.nextpage a {
+	float: right;
+	text-decoration: none;
+	padding: .5em 1em;
+	color: #ff0000;
+	font-weight: bold;
+}
+
+.prepage a:hover, .nextpage a:hover {
+	text-decoration: none;
+	background-color: #ff0000;
+	color: #f9f9f9;
+	-webkit-transition: color .2s linear;
+}
