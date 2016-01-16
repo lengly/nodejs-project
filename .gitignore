@@ -2,4 +2,5 @@
 **/npm-debug.log
 **/.DS_Store
 Chapter1/blog/public/images/
+Chapter1/blog/*.log
 mongodb
