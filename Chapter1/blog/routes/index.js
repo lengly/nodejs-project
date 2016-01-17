@@ -240,7 +240,7 @@ module.exports = function(app) {
 				return res.redirect('/'); //用户不存在则跳转至主页
 			}
 			//查询并返回第page页的10篇文章
-			Post.getTen(null, page, function(err, posts, total) {
+			Post.getTen(user.name, page, function(err, posts, total) {
 				if (err) {
 					req.flash('error', '用户不存在!');
 					return res.redirect('/');
