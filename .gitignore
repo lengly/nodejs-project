@@ -1,5 +1,6 @@
 **/node_modules
 **/npm-debug.log
 **/.DS_Store
-Chapter1/blog/*.log
+**/access.log
+**/error.log
 mongodb
