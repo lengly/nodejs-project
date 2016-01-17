@@ -1,3 +1,4 @@
+var passport = require('passport');
 var crypto = require('crypto');
 var User = require('../models/user.js');
 var Post = require('../models/post.js');
@@ -84,6 +85,28 @@ module.exports = function(app) {
 			user: req.session.user,
 			success: req.flash('success').toString(),
 			error: req.flash('error').toString()
+		});
+	});
+
+	app.get("/login/github", passport.authenticate("github", {session: false}));
+	app.get("/login/github/callback", passport.authenticate("github", {
+		session: false,
+		failureRedirect: '/login'
+		//successFlash: '登陆成功?'
+	}), function(req, res) {
+		//检查用户是否存在
+		User.get(req.user.username, function(err, user) {
+			if (!user) {
+				req.session.user = {
+					name: req.user.username,
+					head: "https://gravatar.com/avatar/" + req.user._json.gravatar_id + "?s=48"
+				}
+				req.flash('success', '登陆成功!');
+				return res.redirect('/');
+			} else {
+				req.flash('error', '用户已存在!');
+				return res.redirect('/login');
+			}
 		});
 	});
 
@@ -233,29 +256,22 @@ module.exports = function(app) {
 
 	app.get('/u/:name', function(req, res) {
 		var page = req.query.p ? parseInt(req.query.p) : 1;
-		//检查用户是否存在
-		User.get(req.params.name, function(err, user) {
-			if (!user) {
+		//查询并返回第page页的10篇文章
+		Post.getTen(req.params.name, page, function(err, posts, total) {
+			if (err) {
 				req.flash('error', '用户不存在!');
-				return res.redirect('/'); //用户不存在则跳转至主页
+				return res.redirect('/');
 			}
-			//查询并返回第page页的10篇文章
-			Post.getTen(user.name, page, function(err, posts, total) {
-				if (err) {
-					req.flash('error', '用户不存在!');
-					return res.redirect('/');
-				}
-				res.render('index', {
-					title: user.name,
-					posts: posts,
-					page: page,
-					isFirstPage: (page - 1) == 0,
-					isLastPage: ((page - 1) * 10 + posts.length) == total,
-					user: req.session.user,
-					success: req.flash('success').toString(),
-					error: req.flash('error').toString()
-				});	
-			});
+			res.render('index', {
+				title: req.params.name,
+				posts: posts,
+				page: page,
+				isFirstPage: (page - 1) == 0,
+				isLastPage: ((page - 1) * 10 + posts.length) == total,
+				user: req.session.user,
+				success: req.flash('success').toString(),
+				error: req.flash('error').toString()
+			});	
 		});
 	});
 

@@ -17,6 +17,9 @@ var accessLog = fs.createWriteStream('access.log', {flags: 'a'});
 var errorLog = fs.createWriteStream('error.log', {flags: 'a'});
 var app = express();
 
+var passport = require('passport');
+var GithubStrategy = require('passport-github').Strategy;
+
 app.set('port', process.env.PORT || 3000)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -45,11 +48,22 @@ app.use(session({
 }));
 app.use(flash());
 app.use(multer({
-	dest: './public/images',
-	rename: function(fieldname, filename) {
-		return filename;
-	}
+  dest: './public/images',
+  rename: function(fieldname, filename) {
+    return filename;
+  }
 }));
+app.use(passport.initialize());
+
+if (app.get('env') == 'development') {
+  passport.use(new GithubStrategy({
+    clientID: "xxx",
+    clientSecret: "xxx",
+    callbackURL: "http://localhost:3000/login/github/callback"
+  }, function(accessToken, refreshToken, profile, done) {
+    done(null, profile);
+  }));
+}
 
 routes(app);
 
