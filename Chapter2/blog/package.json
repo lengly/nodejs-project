@@ -21,6 +21,7 @@
     "multer": "0.1.6",
     "passport": "*",
     "passport-github": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "async": "*"
   }
 }

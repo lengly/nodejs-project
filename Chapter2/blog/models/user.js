@@ -1,16 +1,6 @@
+var mongodb = require('./db');
 var crypto = require('crypto');
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/blog');
-
-var userSchema = new mongoose.Schema({
-	name: String,
-	email: String,
-	head: String
-}, {
-	collection: 'users'
-});
-
-var userModel = mongoose.model('User', userSchema);
+var async = require('async');
 
 function User(user) {
 	this.name = user.name;
@@ -32,23 +22,52 @@ User.prototype.save = function(callback) {
 		email: this.email,
 		head: head
 	};
-
-	var newUser = new userModel(user);
-
-	newUser.save(function(err, user) {
-		if (err) {
-			return callback(err);
+	async.waterfall([
+		function(callback) {
+			mongodb.open(function(err, db) {
+				callback(err, db);
+			});
+		},
+		function(db, callback) {
+			db.collection('users', function(err, collection) {
+				callback(err, collection);
+			});
+		},
+		function(collection, callbackb) {
+			collection.insert(user, {
+				safe: true
+			}, function(err, user) {
+				callback(err, user[0]); 
+			});
 		}
-		callback(null, user);
+	], function(err, user) {
+		mongodb.close();
+		callback(err, user[0]);
 	});
 }
 
 //读取用户信息
 User.get = function(name, callback) {
-	userModel.findOne({name: name}, function(err, user) {
-		if (err) {
-			return callback(err);
+	async.waterfall([
+		function(callback) {
+			mongodb.open(function(err, db) {
+				callback(err, db);
+			});
+		},
+		function(db, callback) {
+			db.collection('users', function(err, collection) {
+				callback(err, collection);
+			});
+		},
+		function(collection, callback) {
+			collection.findOne({
+				name: name
+			}, function(err, user) {
+				callback(err, user);
+			});
 		}
-		callback(null, user);
+	], function(err, user) {
+		mongodb.close();
+		callback(err, user);
 	});
 }
