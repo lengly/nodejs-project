@@ -38,13 +38,8 @@ app.use(function(err, req, res, next) {
 });
 app.use(session({
   secret: settings.cookieSecret,
-  key: settings.db, //cookie name
   cookie: {maxAge: 1000 * 60 * 60 * 24 * 30}, //30 days 
-  store: new MongoStore({
-    db: settings.db,
-    host: settings.host,
-    port: settings.port
-  })
+  url: settings.url
 }));
 app.use(flash());
 app.use(multer({
