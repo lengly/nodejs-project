@@ -1,5 +1,4 @@
 var mongodb = require('./db');
-var markdown = require('markdown').markdown;
 
 function Post(name, head, title, tags, post) {
 	this.name = name;
@@ -90,9 +89,6 @@ Post.getTen = function(name, page, callback) {
 					if (err) {
 						return callback(err); //失败
 					}
-					docs.forEach(function (doc) {
-						doc.post = markdown.toHTML(doc.post);
-					});
 					callback(null, docs, total); //成功 以数组形式返回查询结果
 				});
 			});
@@ -136,11 +132,6 @@ Post.getOne = function(name, day, title, callback) {
 						if (err) {
 							return callback(err);
 						}
-					});
-					//解析 markdown 为 html
-					doc.post = markdown.toHTML(doc.post);
-					doc.comments.forEach(function(comment) {
-						comment.content = markdown.toHTML(comment.content);
 					});
 					callback(null, doc); //返回查询的一篇文章
 				}
