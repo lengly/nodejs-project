@@ -1,4 +1,6 @@
 module.exports = {
 	cookieSecret: 'myblog',
-	url: 'mongodb://admin:admin@ds047065.mongolab.com:47065/lengly_blog'
+	db: 'blog',
+	host: 'localhost',
+	port: 27017
 };
