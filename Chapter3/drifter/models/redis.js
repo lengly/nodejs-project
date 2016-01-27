@@ -24,6 +24,9 @@ exports.throw = function(bottle, callback) {
 
 // 捡一个漂流瓶
 exports.pick = function(info, callback) {
+	if (Math.random() <= 0.2) {
+		return callback({code: 0, msg: "海星"});
+	}
 	var type = {all: Math.round(Math.random()), male: 0, female: 1};
 	info.type = info.type || "all";
 	// 根据请求的瓶子类型到不同的数据库中取
@@ -31,7 +34,7 @@ exports.pick = function(info, callback) {
 		// 随机返回一个漂流瓶id
 		client.RANDOMKEY(function(err, bottleId) {
 			if (!bottleId) {
-				return callback({code: 0, msg: "大海空空如也..."});
+				return callback({code: 0, msg: "海星"});
 			}
 			// 根据漂流瓶id取到漂流瓶完整信息
 			client.HGETALL(bottleId, function(err, bottle) {
