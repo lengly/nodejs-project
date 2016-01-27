@@ -32,4 +32,12 @@ app.get('/', function(req, res) {
 	});
 });
 
+// 扔回海里一个漂流瓶
+// POST owner=xxx&type=xxx&content=xxx&time=xxx
+app.post('/back', function(req, res) {
+	redis.throwBack(req.body, function(result) {
+		res.json(result);
+	});
+});
+
 app.listen(3000);

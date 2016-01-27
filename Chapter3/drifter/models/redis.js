@@ -49,3 +49,23 @@ exports.pick = function(info, callback) {
 		});
 	});
 }
+
+// 将捡到的漂流瓶扔回海里
+exports.throwBack = function(bottle, callback) {
+	var type = {male: 0, femalt: 1};
+	// 为每个漂流瓶随机生成一个id
+	var bottleId = Math.random().toString(16);
+	// 根据漂流瓶类型的不同将漂流瓶保存到不同的数据库
+	client.SELECT(type[bottle.type], function() {
+		// 以hash类型保存漂流瓶对象
+		client.HMSET(bottleId, bottle, function(err, result) {
+			if (err) {
+				return callback({code: 0, msg: "过会再试试吧!"});
+			}
+			// 返回结果 成功时返回OK
+			callback({code: 1, msg: result});
+			// 根据漂流瓶的原始时间设置生存期
+			client.EXPIRE(bottleId, bottle.time + 86400000 - Date.now());
+		});
+	});
+}
