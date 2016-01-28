@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/drifter');
+mongoose.connect('mongodb://admin:admin@ds051655.mongolab.com:51655/lengly_drifter');
 
 // 定义漂流瓶模型 并设置数据存储到bottles集合
 var bottleModel = mongoose.model('Bottle', new mongoose.Schema({

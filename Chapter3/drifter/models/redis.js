@@ -1,7 +1,7 @@
 var redis = require('redis');
-var client = redis.createClient();
-var client2 = redis.createClient();
-var client3 = redis.createClient();
+var client = redis.createClient('3461', '50.30.35.9', {auth_pass: '6a58801b3ca1cef73227779eac6637cc'});
+var client2 = redis.createClient('3461', '50.30.35.9', {auth_pass: '6a58801b3ca1cef73227779eac6637cc'});
+var client3 = redis.createClient('3461', '50.30.35.9', {auth_pass: '6a58801b3ca1cef73227779eac6637cc'});
 
 // 扔一个漂流瓶
 exports.throw = function(bottle, callback) {
