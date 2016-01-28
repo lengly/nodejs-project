@@ -66,4 +66,23 @@ app.get('/bottle/:_id', function(req, res) {
 	});
 });
 
+// 回复特定id的漂流瓶
+// POST user=xxx&content=xxx[&time=xxx]
+app.post('/reply/:_id', function(req, res) {
+	if (!(req.body.user && req.body.content)) {
+		return res.json({code: 0, msg: "信息不完整"});
+	}
+	mongodb.reply(req.params._id, req.body, function(result) {
+		res.json(result);
+	});
+});
+
+// 删除特定id的漂流瓶
+// GET /delete/56aa18d2318a01bf59fe0d16
+app.get('/delete/:_id', function(req, res) {
+	mongodb.delete(req.params._id, function(result) {
+		res.json(result);
+	});
+});
+
 app.listen(3000);
