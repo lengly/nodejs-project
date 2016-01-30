@@ -23,9 +23,9 @@
 				<a class="brand" href="/">weibo</a> 
 				<div class="nav-collapse"> 
 					<ul class="nav"> 
-						<li class="active"><a href="/">首页</a></li> 
-						<li><a href="/login">登入</a></li> 
-						<li><a href="/reg">注册</a></li> 
+						<li class="{{active.index}}"><a href="/">首页</a></li> 
+						<li class="{{active.login}}"><a href="/login">登入</a></li> 
+						<li class="{{active.reg}}"><a href="/reg">注册</a></li> 
 					</ul> 
 				</div> 
 			</div> 
@@ -35,7 +35,17 @@
 
 <template name="container">
 	<div id="container" class="container">
-		{{> index}}
+		{{# if currentUrl.index}}
+			{{> index}}
+		{{/if}}
+
+		{{# if currentUrl.login}}
+			{{> login}}
+		{{/if}}
+
+		{{# if currentUrl.reg}}
+			{{> reg}}
+		{{/if}}
 	</div>
 </template>
 
