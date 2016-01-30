@@ -112,3 +112,30 @@ Template.login.events({
 		});
 	}
 });
+
+Posts = new Meteor.Collection("posts");
+
+Template.index.events({
+	'click #submit': function(evt) {
+		evt.preventDefault();
+		var $post = $("#post").val();
+		if ($post.length === 0 || $post.length >= 140) {
+			Session.set("info", {success: "", error: "请将字数限制在1-140字"});
+			return;
+		}
+		Posts.insert({user: Meteor.user(), post: $post, time: new Date()}, function(err) {
+			if (err) {
+				Session.set("info", {success: "", error: err.reason});
+			} else {
+				Session.set("info", {success: "发表成功", error: ""});
+				$("#post").val("");
+			}
+		});
+	}
+});
+
+Template.index.helpers({
+	posts: function() {
+		return Posts.find({}, {sort: {time: -1}});
+	}
+});
