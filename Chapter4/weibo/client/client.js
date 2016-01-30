@@ -92,3 +92,23 @@ Template.reg.events({
 		});
 	}
 });
+
+Template.login.events({
+	'click #submit': function(evt) {
+		evt.preventDefault();
+		var $username = $("#username").val();
+		var $password = $("#password").val();
+		if ($password.length === 0 || $username.length === 0) {
+			Session.set("info", {success: "", error: "用户名或密码不能为空"});
+			return;
+		}
+		Meteor.loginWithPassword($username, $password, function(err) {
+			if (err) {
+				Session.set("info", {success: "", error: err.reason});
+			} else {
+				Router.redirect("/");
+				Session.set("info", {success: "登陆成功", error: ""});
+			}
+		});
+	}
+});
