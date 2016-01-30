@@ -1,0 +1,44 @@
+<head>
+	<title>weibo</title>
+	<style type="text/css"> 
+		body {padding-top: 60px;padding-bottom: 20px;} 
+	</style> 
+</head>
+
+<body>
+{{> nav}}
+{{> container}}
+{{> footer}}
+</body>
+
+<template name="nav">
+	<div class="navbar navbar-inverse navbar-fixed-top"> 
+		<div class="navbar-inner"> 
+			<div class="container"> 
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+				</a> 
+				<a class="brand" href="/">weibo</a> 
+				<div class="nav-collapse"> 
+					<ul class="nav"> 
+						<li class="active"><a href="/">首页</a></li> 
+						<li><a href="/login">登入</a></li> 
+						<li><a href="/reg">注册</a></li> 
+					</ul> 
+				</div> 
+			</div> 
+		</div> 
+	</div> 
+</template>
+
+<template name="container">
+	<div id="container" class="container">
+		{{> index}}
+	</div>
+</template>
+
+<template name="footer">
+	<p class="muted text-center">lengly 2016</p>
+</template>
