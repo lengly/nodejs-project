@@ -41,6 +41,7 @@ launch-screen@1.0.4
 livedata@1.0.15
 localstorage@1.0.5
 logging@1.0.8
+markdown@1.0.5
 meteor@1.1.10
 meteor-base@1.0.1
 minifiers@1.1.7
@@ -64,6 +65,7 @@ routepolicy@1.0.6
 service-configuration@1.0.5
 session@1.1.1
 sha@1.0.4
+showdown@1.0.5
 spacebars@1.0.7
 spacebars-compiler@1.0.7
 srp@1.0.4

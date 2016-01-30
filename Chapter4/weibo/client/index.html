@@ -19,6 +19,6 @@
 	{{#each posts}}
 		<h2>{{user.username}} 说</h2>
 		<p class="muted">{{time}}</p>
-		<p>{{post}}</p>
+		<p>{{#markdown}}{{post}}{{/markdown}}</p>
 	{{/each}}
 </template>
