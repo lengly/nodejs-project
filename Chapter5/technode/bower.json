@@ -1,0 +1,22 @@
+{
+  "name": "technode",
+  "description": "",
+  "main": "",
+  "authors": [
+    "lengly <liu_yuda@163.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/lengly/nodejs-project",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "angular": "^1.4.9"
+  }
+}

@@ -3,4 +3,5 @@
 **/.DS_Store
 **/access.log
 **/error.log
+**/components
 mongodb
