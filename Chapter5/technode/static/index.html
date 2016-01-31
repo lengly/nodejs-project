@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+	<head>
+		<title>technode</title>
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var socket = io.connect('/');
+			socket.on('connected', function() {
+				alert('connected to technode!');
+			});
+		</script>
+	</body>
+</html>
