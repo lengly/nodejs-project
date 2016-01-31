@@ -1,18 +1,42 @@
 <!doctype html>
-<html>
+<html ng-app="technodeApp">
 	<head>
 		<title>technode</title>
 		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 		<script type="text/javascript" src="/components/jquery/dist/jquery.js"></script>
 		<script type="text/javascript" src="/components/bootstrap/dist/js/bootstrap.js"></script>
 		<script type="text/javascript" src="/components/angular/angular.js"></script>
+		<link rel="stylesheet" type="text/css" href="/components/bootstrap/dist/css/bootstrap.css">
+		<!-- <link rel="stylesheet" type="text/css" href="/styles/room.css"> -->
 	</head>
 	<body>
-		<script type="text/javascript">
-			var socket = io.connect('/');
-			socket.on('connected', function() {
-				alert('connected to technode!');
-			});
-		</script>
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">technode</a>
+				</div>
+			</div>
+		</div>
+		<div class="container" style="margin-top: 100px;">
+			<div class="col-md-12">
+				<div class="panel panel-default room" ng-controller="RoomCtrl">
+					<div class="panel-heading room-header">technode</div>
+					<div class="panel-body room-content">
+						<div class="list-group messages" auto-scroll-to-bottom>
+							<div class="list-group-item message" ng-repeat="message in messages">
+								某某: {{message}}
+							</div>
+						</div>
+						<form class="message-cerator" ng-controller="MessageCreatorCtrl">
+							<div class="form-group">
+								<textarea required class="form-control message-input" ng-model="newMessage"
+									ctrl-enter-break-line="createMessage()" placeholder="Ctrl+Enter to break line, Enter to quick send"></textarea>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/technode.js"></script>
 	</body>
 </html>
