@@ -5,7 +5,12 @@
     "start": "node app.js"
   },
   "dependencies": {
+    "body-parser": "^1.14.2",
+    "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
+    "express-session": "^1.13.0",
+    "gravatar": "^1.4.0",
+    "mongoose": "^4.3.7",
     "socket.io": "^1.4.5"
   }
 }

@@ -14,8 +14,18 @@
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container">
 				<div class="navbar-header">
-					<a class="navbar-brand" href="/">Technode</a>
+					<a class="navbar-brand" href="#">Technode</a>
 				</div>
+				<nav class="collapse navbar-collapse" role="navigation">
+					<ul class="nav navbar-nav navbar-right" ng-show="me">
+						<li>
+							<img ng-src="{{me.avatarUrl}}" title="{{me.name}}" class="img-rounded" />
+						</li>
+						<li>
+							<a href="" ng-click="logout()">Logout</a>
+						</li>
+					</ul>
+				</nav>
 			</div>
 		</div>
 		<div class="container" style="margin-top: 100px;">
@@ -28,5 +38,6 @@
 		<script type="text/javascript" src="/directives/ctrl-enter-break-line.js"></script>
 		<script type="text/javascript" src="/controllers/room.js"></script>
 		<script type="text/javascript" src="/controllers/message-creator.js"></script>
+		<script type="text/javascript" src="/controllers/login.js"></script>
 	</body>
 </html>
